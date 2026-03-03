@@ -17,7 +17,7 @@ public class Roller {
     }
 
     public void run() {
-        setSpeed(RollerConstants.IntakeSpeed);
+        setSpeed(RollerConstants.RollerIntakeSpeed);
     }
 
     public void stop() {

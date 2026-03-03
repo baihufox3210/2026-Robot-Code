@@ -7,5 +7,5 @@ public class RollerConstants {
 
     public static final int RollerMotorID = 32;
 
-    public static final double IntakeSpeed = 0.5;
+    public static final double RollerIntakeSpeed = 0.5;
 }

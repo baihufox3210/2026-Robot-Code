@@ -8,7 +8,7 @@ public class ClimberConstants {
     public static final int ClimberMotorID = 51;
 
     public static final double WheelRadius = 1.8;
-    public static final double GearRatio = 125;
+    public static final double GearRatio = 100;
 
     public static final double PositionConversionFactor = 2 * Math.PI * WheelRadius / GearRatio;
     public static final double VelocityConversionFactor = PositionConversionFactor / 60;

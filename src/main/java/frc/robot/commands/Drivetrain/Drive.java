@@ -19,9 +19,9 @@ public class Drive extends Command {
 
     @Override
     public void execute() {
-        double xSpeed = applyDeadband(controller.getLeftY());
-        double ySpeed = applyDeadband(controller.getLeftX());
-        double rotSpeed = applyDeadband(controller.getRightX());
+        double xSpeed = -applyDeadband(controller.getLeftY());
+        double ySpeed = -applyDeadband(controller.getLeftX());
+        double rotSpeed = -applyDeadband(controller.getRightX());
 
         drivetrain.drive(xSpeed, ySpeed, rotSpeed);
     }

@@ -36,10 +36,10 @@ public class DrivetrainConstants {
     public static final Pose2d InitialPose = new Pose2d(0, 0, Rotation2d.kZero);
 
     public static final double[] AngleOffsets = {
-        0.1521126,
-        0.0067503,
-        0.3277588,
-        0.1364698
+        0.6521126,
+        0.5067503,
+        0.8277588,
+        0.6364698
     };
 
     public static final class DriveMotorConfig {

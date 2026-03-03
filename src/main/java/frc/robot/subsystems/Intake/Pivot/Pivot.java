@@ -2,11 +2,12 @@ package frc.robot.subsystems.Intake.Pivot;
 
 import static edu.wpi.first.units.Units.Radians;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.hardware.Factory.MotorFactory;
 import frc.robot.hardware.interfaces.GenericEncoder;
 import frc.robot.hardware.interfaces.GenericMotor;
 
-public class Pivot {
+public class Pivot extends SubsystemBase {
     private static Pivot instance;
 
     private final GenericMotor pivotMotor;

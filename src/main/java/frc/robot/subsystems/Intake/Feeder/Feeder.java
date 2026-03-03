@@ -1,9 +1,10 @@
 package frc.robot.subsystems.Intake.Feeder;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.hardware.Factory.MotorFactory;
 import frc.robot.hardware.interfaces.GenericMotor;
 
-public class Feeder {
+public class Feeder extends SubsystemBase {
     private static Feeder instance;
 
     private final GenericMotor feederMotor;

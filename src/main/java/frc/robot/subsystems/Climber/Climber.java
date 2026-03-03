@@ -1,10 +1,11 @@
 package frc.robot.subsystems.Climber;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.hardware.Factory.MotorFactory;
 import frc.robot.hardware.interfaces.GenericEncoder;
 import frc.robot.hardware.interfaces.GenericMotor;
 
-public class Climber {
+public class Climber extends SubsystemBase {
     private static Climber instance;
 
     private GenericMotor climberMotor;

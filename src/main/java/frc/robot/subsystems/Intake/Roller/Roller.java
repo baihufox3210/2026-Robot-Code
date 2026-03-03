@@ -10,6 +10,7 @@ public class Roller {
 
     public Roller() {
         rollerMotor = MotorFactory.createMotor(RollerConstants.RollerMotorID, RollerConstants.RollerMotorModel, RollerConfig.getRollerMotorConfig());
+        rollerMotor.configure();
     }
 
     public void setSpeed(double speed) {

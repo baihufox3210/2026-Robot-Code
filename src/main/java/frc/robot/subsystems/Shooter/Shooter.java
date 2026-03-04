@@ -1,9 +1,10 @@
 package frc.robot.subsystems.Shooter;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.hardware.Factory.MotorFactory;
 import frc.robot.hardware.interfaces.GenericMotor;
 
-public class Shooter {
+public class Shooter extends SubsystemBase {
     private static Shooter instance;
 
     private final GenericMotor shooterMotor;

@@ -13,7 +13,7 @@ public class Pivot extends SubsystemBase {
     private final GenericMotor pivotMotor;
     private final GenericEncoder pivotEncoder;
 
-    public Pivot() {
+    private Pivot() {
         pivotMotor = MotorFactory.createMotor(PivotConstants.PivotMotorID, PivotConstants.PivotMotorModel, PivotConfig.getPivotMotorConfig());
         pivotEncoder = pivotMotor.getEncoder();
 

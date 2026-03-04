@@ -11,7 +11,7 @@ public class Climber extends SubsystemBase {
     private GenericMotor climberMotor;
     private GenericEncoder climberEncoder;
 
-    public Climber() {
+    private Climber() {
         climberMotor = MotorFactory.createMotor(ClimberConstants.ClimberMotorID, ClimberConstants.ClimberMotorModel, ClimberConfig.getClimberMotorConfig());
         climberEncoder = climberMotor.getEncoder();
 

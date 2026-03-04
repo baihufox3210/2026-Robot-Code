@@ -9,7 +9,7 @@ public class Roller extends SubsystemBase {
 
     private final GenericMotor rollerMotor;
 
-    public Roller() {
+    private Roller() {
         rollerMotor = MotorFactory.createMotor(RollerConstants.RollerMotorID, RollerConstants.RollerMotorModel, RollerConfig.getRollerMotorConfig());
         rollerMotor.configure();
     }

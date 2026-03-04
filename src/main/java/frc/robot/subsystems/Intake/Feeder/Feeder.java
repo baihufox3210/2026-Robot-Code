@@ -9,7 +9,7 @@ public class Feeder extends SubsystemBase {
 
     private final GenericMotor feederMotor;
 
-    public Feeder() {
+    private Feeder() {
         feederMotor = MotorFactory.createMotor(FeederConstants.FeederMotorID, FeederConstants.FeederMotorModel, FeederConfig.getFeederMotorConfig());
         feederMotor.configure();
     }

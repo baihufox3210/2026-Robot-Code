@@ -105,4 +105,14 @@ public class MotorConfig {
         this.inertia = inertia;
         return this;
     }
+
+    public MotorConfig setCruiseVelocity(double cruiseVelocity) {
+        this.cruiseVelocity = cruiseVelocity;
+        return this;
+    }
+
+    public MotorConfig setMaxAcceleration(double maxAcceleration) {
+        this.maxAcceleration = maxAcceleration;
+        return this;
+    }
 }

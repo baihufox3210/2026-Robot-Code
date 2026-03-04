@@ -16,6 +16,7 @@ import frc.robot.commands.Climber.ToggleClimberPosition;
 import frc.robot.commands.Drivetrain.Drive;
 import frc.robot.commands.Intake.Intaking;
 import frc.robot.commands.Intake.TogglePivotPosition;
+import frc.robot.commands.Shooter.Shooting;
 import frc.robot.subsystems.Drivetrain.Drivetrain;
 
 public class RobotContainer {
@@ -28,8 +29,10 @@ public class RobotContainer {
 
 		controller.b().onTrue(new ToggleClimberPosition());
 		controller.x().onTrue(new Climbing());
-		
+
 		controller.leftBumper().onTrue(new TogglePivotPosition());
+
+		controller.rightBumper().whileTrue(new Shooting());
 
 		controller.a().toggleOnTrue(new Intaking());
 	}

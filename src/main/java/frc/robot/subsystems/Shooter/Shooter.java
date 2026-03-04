@@ -18,8 +18,8 @@ public class Shooter extends SubsystemBase {
         feederMotor.configure();
     }
 
-    private void setShooterVelocity(double speed) {
-        shooterMotor.setVelocity(speed);
+    private void setShooterSpeed(double speed) {
+        shooterMotor.set(speed);
     }
 
     private void setFeederSpeed(double speed) {
@@ -27,7 +27,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public void run() {
-        setShooterVelocity(ShooterConstants.ShooterSpeed);
+        setShooterSpeed(ShooterConstants.ShooterSpeed);
         setFeederSpeed(ShooterConstants.FeederSpeed);
     }
 

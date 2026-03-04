@@ -15,9 +15,6 @@ public class ShooterConstants {
     public class InnerShooterConstants {
         public static final boolean Inverted = true;
 
-        public static final double cruiseVelocity = 65.0;
-        public static final double maxAcceleration = 80;
-
         public static final double kP = 1;
     }
 }

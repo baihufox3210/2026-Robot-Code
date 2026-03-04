@@ -9,11 +9,6 @@ public class ShooterConfig {
 
         shooterMotorConfig.setInverted(InnerShooterConstants.Inverted);
 
-        shooterMotorConfig.withKP(InnerShooterConstants.kP);
-
-        shooterMotorConfig.setCruiseVelocity(InnerShooterConstants.cruiseVelocity);
-        shooterMotorConfig.setMaxAcceleration(InnerShooterConstants.maxAcceleration);
-
         return shooterMotorConfig;
     }
     

@@ -11,9 +11,11 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-
+import frc.robot.commands.Climber.Climbing;
+import frc.robot.commands.Climber.ToggleClimberPosition;
 import frc.robot.commands.Drivetrain.Drive;
-
+import frc.robot.commands.Intake.Intaking;
+import frc.robot.commands.Intake.TogglePivotPosition;
 import frc.robot.subsystems.Drivetrain.Drivetrain;
 
 public class RobotContainer {
@@ -23,6 +25,13 @@ public class RobotContainer {
 
 	public RobotContainer() {
 		drivetrain.setDefaultCommand(new Drive(controller));
+
+		controller.b().onTrue(new ToggleClimberPosition());
+		controller.x().onTrue(new Climbing());
+		
+		controller.leftBumper().onTrue(new TogglePivotPosition());
+
+		controller.a().toggleOnTrue(new Intaking());
 	}
 	
 	public Command getAutonomousCommand() {

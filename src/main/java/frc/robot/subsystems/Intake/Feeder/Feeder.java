@@ -14,8 +14,12 @@ public class Feeder extends SubsystemBase {
         feederMotor.configure();
     }
 
-    public void setSpeed(double speed) {
+    private void setSpeed(double speed) {
         feederMotor.set(speed);
+    }
+
+    public void run() {
+        setSpeed(FeederConstants.ShootingSpeed);
     }
 
     public void stop() {
@@ -25,20 +29,5 @@ public class Feeder extends SubsystemBase {
     public static Feeder getInstance() {
         if (instance == null) instance = new Feeder();
         return instance;
-    }
-
-    public enum FeederMode {
-        INTAKE(FeederConstants.FeederIntakeSpeed),
-        SHOOTING(FeederConstants.FeederShootingSpeed);
-
-        private final double speed;
-
-        FeederMode(double speed) {
-            this.speed = speed;
-        }
-
-        public double getSpeed() {
-            return speed;
-        }
     }
 }

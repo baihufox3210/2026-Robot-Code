@@ -5,12 +5,15 @@ import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 
+import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.numbers.N1;
+import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.StructPublisher;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -20,10 +23,12 @@ import frc.robot.hardware.interfaces.GenericGyro;
 import frc.robot.subsystems.Drivetrain.DrivetrainConstants.DriveMotorConfig;
 import frc.robot.subsystems.Drivetrain.DrivetrainConstants.TurningMotorConfig;
 import frc.robot.subsystems.Drivetrain.module.SwerveModule;
+import frc.robot.subsystems.Vision.Vision;
 
 public class Drivetrain extends SubsystemBase {
     private static Drivetrain instance;
 
+    private final Vision vision;
     private final GenericGyro gyro;
     private final SwerveModule[] swerveModules;
 
@@ -32,6 +37,7 @@ public class Drivetrain extends SubsystemBase {
     private final StructPublisher<Pose2d> publisherField;
 
     private Drivetrain() {
+        vision = new Vision(this::addVisionMeasurement);
         gyro = GyroFactory.createGyro(DrivetrainConstants.gyroModel, DrivetrainConstants.gyroID);
 
         swerveModules = new SwerveModule[4];
@@ -65,6 +71,12 @@ public class Drivetrain extends SubsystemBase {
         );
 
         publisherField.set(getPose());
+
+        vision.update();
+    }
+
+    private void addVisionMeasurement(Pose2d visionMeasurement, double timestampSeconds, Matrix<N3, N1> stdDevs) {
+        poseEstimator.addVisionMeasurement(visionMeasurement, timestampSeconds, stdDevs);
     }
 
     public Pose2d getPose() {

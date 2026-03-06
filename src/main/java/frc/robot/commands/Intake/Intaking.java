@@ -1,16 +1,13 @@
 package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Intake.Feeder.Feeder;
-import frc.robot.subsystems.Intake.Feeder.Feeder.FeederMode;
 import frc.robot.subsystems.Intake.Roller.Roller;
 
 public class Intaking extends Command {
     private final Roller roller;
 
     public Intaking() {
-        feeder = Feeder.getInstance();
-
+        roller = Roller.getInstance();
         addRequirements(roller);
     }
 

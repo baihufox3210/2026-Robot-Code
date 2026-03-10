@@ -63,8 +63,8 @@ public class SparkMaxMotor implements GenericMotor {
             .inverted(motorConfig.encoderInverted);
 
         config.closedLoop
-            .pid(motorConfig.kP, motorConfig.kI, motorConfig.kD)
-            .apply(new FeedForwardConfig().kS(motorConfig.kS).kV(motorConfig.kV).kA(motorConfig.kA));
+            .pid(motorConfig.kP, motorConfig.kI, motorConfig.kD);
+            // .apply(new FeedForwardConfig().kS(motorConfig.kS).kV(motorConfig.kV).kA(motorConfig.kA));
         
         config.closedLoop.feedbackSensor(motorConfig.feedbackSensorType);
         config.closedLoop.apply(motionConfig);

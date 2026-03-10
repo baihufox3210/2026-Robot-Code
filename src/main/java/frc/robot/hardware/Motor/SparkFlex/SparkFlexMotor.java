@@ -15,6 +15,7 @@ import frc.robot.hardware.Factory.MotorFactory.MotorModel;
 import frc.robot.hardware.Motor.SparkFlex.Encoder.SparkFlexAbsoluteEncoder;
 import frc.robot.hardware.Motor.SparkFlex.Encoder.SparkFlexRelativeEncoder;
 import frc.robot.hardware.config.MotorConfig;
+import frc.robot.hardware.config.MotorConfig.NeutralMode;
 import frc.robot.hardware.interfaces.GenericEncoder;
 import frc.robot.hardware.interfaces.GenericMotor;
 
@@ -38,7 +39,8 @@ public class SparkFlexMotor implements GenericMotor {
         SparkFlexConfig config = new SparkFlexConfig();
         MAXMotionConfig motionConfig = new MAXMotionConfig();
 
-        config.idleMode(IdleMode.kBrake);
+        if(motorConfig.idleMode == NeutralMode.COAST) config.idleMode(IdleMode.kCoast);
+        else config.idleMode(IdleMode.kBrake);
 
         config.inverted(motorConfig.inverted);
 

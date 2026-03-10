@@ -2,7 +2,13 @@ package frc.robot.hardware.config;
 
 import com.revrobotics.spark.FeedbackSensor;
 
-public class MotorConfig {   
+public class MotorConfig {
+    public enum NeutralMode {
+        BRAKE, COAST;
+    }
+
+    public NeutralMode  idleMode = NeutralMode.BRAKE;
+    
     public double voltageCompensation = 12.0;
     
     public double kP = 0.0;
@@ -113,6 +119,11 @@ public class MotorConfig {
 
     public MotorConfig setMaxAcceleration(double maxAcceleration) {
         this.maxAcceleration = maxAcceleration;
+        return this;
+    }
+
+    public MotorConfig setNeutralMode(NeutralMode idleMode) {
+        this.idleMode = idleMode;
         return this;
     }
 }

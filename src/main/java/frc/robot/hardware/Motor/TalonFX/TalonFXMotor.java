@@ -14,11 +14,13 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.StaticFeedforwardSignValue;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.hardware.Factory.MotorFactory.MotorModel;
 import frc.robot.hardware.Motor.TalonFX.Encoder.TalonFXRelativeEncoder;
 import frc.robot.hardware.config.MotorConfig;
+import frc.robot.hardware.config.MotorConfig.NeutralMode;
 import frc.robot.hardware.interfaces.GenericEncoder;
 import frc.robot.hardware.interfaces.GenericMotor;
 
@@ -47,7 +49,8 @@ public class TalonFXMotor implements GenericMotor {
     public void configure() {
         TalonFXConfiguration config = new TalonFXConfiguration();
 
-        config.MotorOutput.withNeutralMode(NeutralModeValue.Brake);
+        if(motorConfig.idleMode == NeutralMode.COAST) config.MotorOutput.withNeutralMode(NeutralModeValue.Coast);
+        else config.MotorOutput.withNeutralMode(NeutralModeValue.Brake);
 
         if (motorConfig.inverted) config.MotorOutput.withInverted(InvertedValue.Clockwise_Positive);
         else config.MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive);

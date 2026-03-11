@@ -7,5 +7,5 @@ public class FeederConstants {
 
     public static final int FeederMotorID = 33;
 
-    public static final double ShootingSpeed = 0.7;
+    public static final double ShootingSpeed = 0.3;
 }

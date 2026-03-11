@@ -6,6 +6,8 @@ import frc.robot.subsystems.Intake.Pivot.Pivot.PivotMode;
 
 public class TogglePivotPosition extends Command {
     private final Pivot pivot;
+
+    private boolean isDown = false;
     private PivotMode targetMode; 
 
     public TogglePivotPosition() {
@@ -15,10 +17,12 @@ public class TogglePivotPosition extends Command {
 
     @Override
     public void initialize() {
-        if(pivot.isPivotAtPosition(PivotMode.DOWN.getPosition())) targetMode = PivotMode.RETRACT;
+        if(isDown) targetMode = PivotMode.RETRACT;
         else targetMode = PivotMode.DOWN;
 
         pivot.setPosition(targetMode.getPosition());
+
+        isDown = !isDown;
     }
 
     @Override

@@ -10,6 +10,8 @@ import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.NeutralOut;
+import com.ctre.phoenix6.controls.PositionVoltage;
+import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
@@ -29,8 +31,8 @@ public class TalonFXMotor implements GenericMotor {
 
     private final TalonFX motor;
 
-    private final MotionMagicVoltage motionMagic;
-    private final MotionMagicVelocityVoltage motionMagicVelocity;
+    private final VelocityVoltage velocityControl;
+    private final PositionVoltage positionControl;
 
     private final NeutralOut neutralOut = new NeutralOut();
 
@@ -40,8 +42,8 @@ public class TalonFXMotor implements GenericMotor {
 
         motor = new TalonFX(motorID);
 
-        motionMagic = new MotionMagicVoltage(0);
-        motionMagicVelocity = new MotionMagicVelocityVoltage(0);
+        velocityControl = new VelocityVoltage(0);
+        positionControl = new PositionVoltage(0);
     }
 
     @Override
@@ -106,12 +108,12 @@ public class TalonFXMotor implements GenericMotor {
 
     @Override
     public void setVelocity(double speed) {
-        motor.setControl(motionMagicVelocity.withVelocity(speed).withSlot(0));
+        motor.setControl(velocityControl.withVelocity(speed).withSlot(0));
     }
 
     @Override
     public void setPosition(double position) {
-        motor.setControl(motionMagic.withPosition(position).withSlot(0));
+        motor.setControl(positionControl.withPosition(position).withSlot(0));
     }
 
     @Override

@@ -13,6 +13,8 @@ public class Pivot extends SubsystemBase {
     private final GenericMotor pivotMotor;
     private final GenericEncoder pivotEncoder;
 
+    private PivotMode pivotState = PivotMode.RETRACT;
+
     private Pivot() {
         pivotMotor = MotorFactory.createMotor(PivotConstants.PivotMotorID, PivotConstants.PivotMotorModel, PivotConfig.getPivotMotorConfig());
         pivotEncoder = pivotMotor.getEncoder();
@@ -26,6 +28,14 @@ public class Pivot extends SubsystemBase {
 
     public void stop() {
         pivotMotor.stop();
+    }
+
+    public PivotMode getPivotState() {
+        return pivotState;
+    }
+
+    public void togglePivotState() {
+        pivotState = pivotState == PivotMode.RETRACT ? PivotMode.DOWN : PivotMode.RETRACT;
     }
 
     public boolean isPivotAtPosition(double position) {

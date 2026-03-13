@@ -13,6 +13,10 @@ public class FieldTransformer {
         return blueAlliancePose;
     }
 
+    public static Translation2d transform(Translation2d bluePose, boolean shouldMirror) {
+        return shouldMirror ? mirror(bluePose) : bluePose;
+    }
+
     private static Translation2d mirror(Translation2d pose) {
         return new Translation2d(
             RobotConstants.FieldSize.getX() - pose.getX(),

@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.Climber.Climbing;
 import frc.robot.commands.Climber.ToggleClimberPosition;
 import frc.robot.commands.Drivetrain.Drive;
+import frc.robot.commands.Drivetrain.DriveToAim;
 import frc.robot.commands.Flywheel.Shooting;
 import frc.robot.commands.Flywheel.SpinningIdle;
 import frc.robot.commands.Intake.Intaking;
@@ -34,8 +35,13 @@ public class RobotContainer {
 		drivetrain.setDefaultCommand(new Drive(controller));
 		flywheel.setDefaultCommand(new SpinningIdle());
 
-		controller.rightBumper().whileTrue(new Shooting(controller));
-		
+		controller.rightBumper().whileTrue(
+			Commands.parallel(
+				new Shooting(),
+				new DriveToAim(controller)
+			)
+		);
+
 		controller.leftBumper().onTrue(new TogglePivotPosition());
 
 		controller.b().onTrue(new ToggleClimberPosition());

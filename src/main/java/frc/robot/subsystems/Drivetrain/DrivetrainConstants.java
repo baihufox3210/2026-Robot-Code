@@ -3,6 +3,8 @@ package frc.robot.subsystems.Drivetrain;
 import static edu.wpi.first.units.Units.Inches;
 import static edu.wpi.first.units.Units.Meters;
 
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import com.revrobotics.spark.FeedbackSensor;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -32,6 +34,11 @@ public class DrivetrainConstants {
         new Translation2d(WheelBase / 2, -TrackWidth / 2),
         new Translation2d(-WheelBase / 2, TrackWidth / 2),
         new Translation2d(-WheelBase / 2, -TrackWidth / 2)
+    );
+
+    public static final PPHolonomicDriveController HolonomicDriveController = new PPHolonomicDriveController(
+        new PIDConstants(2.0, 0.0, 0.0),
+        new PIDConstants(2.0, 0.0, 0.0)   
     );
 
     public static final PIDController rotationPID = new PIDController(0.7, 0.0, 0.0);

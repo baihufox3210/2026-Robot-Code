@@ -5,7 +5,9 @@ import edu.wpi.first.wpilibj.DriverStation;
 
 public class RobotConstants {
     public static final double Deadband = 0.1;
-    
+
+    public static final double DeltaSecond = 0.02;
+
     public static final Translation2d FieldSize = new Translation2d(16.54, 8.07);
     public static final Translation2d AllianceHub = new Translation2d(4.07, 4.03);
 

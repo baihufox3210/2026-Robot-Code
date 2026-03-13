@@ -18,6 +18,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.StructPublisher;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotConstants;
 import frc.robot.hardware.Factory.GyroFactory;
 import frc.robot.hardware.interfaces.GenericGyro;
 import frc.robot.subsystems.Drivetrain.DrivetrainConstants.DriveMotorConfig;
@@ -121,7 +122,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     private void drive(ChassisSpeeds chassisSpeeds) {
-        ChassisSpeeds discretizedSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
+        ChassisSpeeds discretizedSpeeds = ChassisSpeeds.discretize(chassisSpeeds, RobotConstants.DeltaSecond);
         
         var swerveModuleStates = DrivetrainConstants.kinematics.toSwerveModuleStates(discretizedSpeeds);
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, DriveMotorConfig.maxSpeedMetersPerSecond);
@@ -150,16 +151,9 @@ public class Drivetrain extends SubsystemBase {
                 this::resetPose,
                 this::getRobotSpeeds,
                 (speeds, feedforwards) -> drive(speeds),
-                new PPHolonomicDriveController(
-                    new PIDConstants(2.0, 0.0, 0.0),
-                    new PIDConstants(2.0, 0.0, 0.0)
-                ),
+                DrivetrainConstants.HolonomicDriveController,
                 RobotConfig.fromGUISettings(),
-                () -> {
-                    var alliance = DriverStation.getAlliance();
-                    if (alliance.isPresent()) return alliance.get() == DriverStation.Alliance.Red;
-                    return false;
-                },
+                () -> RobotConstants.isRedAlliance(),
                 this
             );
             

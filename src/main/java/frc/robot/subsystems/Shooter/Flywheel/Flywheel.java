@@ -23,7 +23,7 @@ public class Flywheel extends SubsystemBase {
     }
 
     public void runAutoVelocity() {
-
+        setVelocity(80);
     }
 
     public void stop() {

@@ -11,7 +11,7 @@ public class Drive extends Command {
 
     public Drive(CommandXboxController controller) {
         this.controller = controller;
-        drivetrain = Drivetrain.getInstance();
+        this.drivetrain = Drivetrain.getInstance();
         addRequirements(drivetrain);
     }
 

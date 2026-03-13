@@ -15,6 +15,9 @@ public class ClimberConfig {
         climberMotorConfig.withKV(ClimberConstants.kV);
         climberMotorConfig.withKA(ClimberConstants.kA);
 
+        climberMotorConfig.setInverted(ClimberConstants.Inverted);
+        climberMotorConfig.setEncoderInverted(ClimberConstants.EncoderInverted);
+
         return climberMotorConfig;
     }
 }

@@ -76,7 +76,10 @@ public class Vision extends SubsystemBase {
         boolean hasTargets = result.hasTargets();
         SmartDashboard.putBoolean("Vision/Has Target", hasTargets);
 
-        if(!hasTargets) SmartDashboard.putNumber("Vision/Target ID", -1);
+        if(!hasTargets) {
+            SmartDashboard.putNumber("Vision/Target ID", -1);
+            return;
+        }
 
         var bestTarget = result.getBestTarget();
         var transform = bestTarget.getBestCameraToTarget();

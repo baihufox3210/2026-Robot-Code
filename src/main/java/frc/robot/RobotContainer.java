@@ -14,25 +14,29 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.Climber.Climbing;
 import frc.robot.commands.Climber.ToggleClimberPosition;
 import frc.robot.commands.Drivetrain.Drive;
+import frc.robot.commands.Flywheel.Shooting;
+import frc.robot.commands.Flywheel.SpinningIdle;
 import frc.robot.commands.Intake.Intaking;
 import frc.robot.commands.Intake.TogglePivotPosition;
-import frc.robot.commands.Shooter.Shooting;
 import frc.robot.subsystems.Drivetrain.Drivetrain;
+import frc.robot.subsystems.Shooter.Flywheel.Flywheel;
 
 public class RobotContainer {
 	private Drivetrain drivetrain = Drivetrain.getInstance();
+	private Flywheel flywheel = Flywheel.getInstance();
 	
 	private CommandXboxController controller = new CommandXboxController(0);
 
 	public RobotContainer() {
 		drivetrain.setDefaultCommand(new Drive(controller));
+		flywheel.setDefaultCommand(new SpinningIdle());
 
+		controller.rightBumper().whileTrue(new Shooting(controller));
+		
 		controller.b().onTrue(new ToggleClimberPosition());
 		controller.x().onTrue(new Climbing());
 
 		controller.leftBumper().onTrue(new TogglePivotPosition());
-
-		controller.rightBumper().whileTrue(new Shooting());
 
 		controller.a().toggleOnTrue(new Intaking());
 	}

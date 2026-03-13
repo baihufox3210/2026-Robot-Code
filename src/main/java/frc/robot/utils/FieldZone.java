@@ -10,10 +10,10 @@ public class FieldZone {
 
     public static Zone getZone(Pose2d pose) {
         double x = pose.getX();
-        if(RobotConstants.isRedAlliance()) x = RobotConstants.FieldLength - x;
+        if(RobotConstants.isRedAlliance()) x = RobotConstants.FieldSize.getX() - x;
 
         if(x <= RobotConstants.AllianceDepth) return Zone.ALLIANCE;
-        else if(x <= RobotConstants.FieldLength - RobotConstants.AllianceDepth) return Zone.NEUTRAL;
+        else if(x <= RobotConstants.FieldSize.getX() - RobotConstants.AllianceDepth) return Zone.NEUTRAL;
         else return Zone.OPPONENT;
     }
 }

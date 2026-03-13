@@ -14,7 +14,7 @@ public class FieldTransformer {
 
     private static Pose2d mirror(Pose2d pose) {
         return new Pose2d(
-            RobotConstants.FieldLength - pose.getX(),
+            RobotConstants.FieldSize.getX() - pose.getX(),
             pose.getY(),
             pose.getRotation().plus(Rotation2d.k180deg)
         );

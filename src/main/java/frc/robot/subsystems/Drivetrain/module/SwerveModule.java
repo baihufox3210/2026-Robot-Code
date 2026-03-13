@@ -15,8 +15,6 @@ public class SwerveModule {
     private final GenericEncoder driveEncoder;
     private final GenericEncoder streetEncoder;
 
-    private final GenericEncoder streetAbsEncoder;
-
     private SwerveModuleState desiredState;
 
     public SwerveModule(int driveMotorID, int streetMotorID, double angleOffset) {
@@ -24,15 +22,12 @@ public class SwerveModule {
         streetMotor = MotorFactory.createMotor(streetMotorID, DrivetrainConstants.streetMotorModel, DrivetrainConfig.getStreetMotorConfig(angleOffset));
 
         driveEncoder = driveMotor.getEncoder();
-        streetEncoder = streetMotor.getEncoder();
-
-        streetAbsEncoder = streetMotor.getAbsoluteEncoder();
+        streetEncoder = streetMotor.getAbsoluteEncoder();
 
         driveMotor.configure();
         streetMotor.configure();
 
         resetEncoder();
-        resetToAbsoluteEncoder();
 
         desiredState = new SwerveModuleState();
         desiredState.angle = new Rotation2d(streetEncoder.getPosition());
@@ -54,11 +49,6 @@ public class SwerveModule {
 
     public void resetEncoder() {
         driveEncoder.setPosition(0);
-    }
-
-    private void resetToAbsoluteEncoder() {
-        double absolutePosition = streetAbsEncoder.getPosition();
-        streetEncoder.setPosition(absolutePosition);
     }
 
     public void setDesiredState(SwerveModuleState desiredState) {

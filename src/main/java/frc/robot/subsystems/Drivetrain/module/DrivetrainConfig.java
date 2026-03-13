@@ -54,6 +54,8 @@ public class DrivetrainConfig {
 
         streetMotorConfig.setAngleOffset(angleOffset);
 
+        streetMotorConfig.setFeedbackSensorType(StreetMotorConfig.feedbackSensorType);
+
         return streetMotorConfig;
     }
 }

@@ -15,6 +15,7 @@ import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.StructPublisher;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotConstants;
 import frc.robot.hardware.Factory.GyroFactory;
@@ -74,6 +75,9 @@ public class Drivetrain extends SubsystemBase {
         publisherField.set(getPose());
 
         vision.update();
+
+        SwerveModuleState[] states = getModuleStates();
+        for (int i = 0; i < states.length; i++) SmartDashboard.putNumber("Wheel " + i + " Speed (m/s)", states[i].speedMetersPerSecond);
     }
 
     private void addVisionMeasurement(Pose2d visionMeasurement, double timestampSeconds, Matrix<N3, N1> stdDevs) {

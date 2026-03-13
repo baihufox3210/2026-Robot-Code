@@ -24,7 +24,6 @@ import frc.robot.hardware.interfaces.GenericGyro;
 import frc.robot.subsystems.Drivetrain.DrivetrainConstants.DriveMotorConfig;
 import frc.robot.subsystems.Drivetrain.DrivetrainConstants.StreetMotorConfig;
 import frc.robot.subsystems.Drivetrain.module.SwerveModule;
-import frc.robot.utils.AimingParameters;
 
 public class Drivetrain extends SubsystemBase {
     private static Drivetrain instance;
@@ -97,20 +96,6 @@ public class Drivetrain extends SubsystemBase {
         for (int i = 0; i < 4; i++) positions[i] = swerveModules[i].getPosition();
         return positions;
     }
-
-    // private void driveToAngle(double xSpeed, double ySpeed, double targetAngle) {
-    //     double rotationOutput = DrivetrainConstants.rotationPID.calculate(
-    //         gyro.getRotation2d().getRadians(),
-    //         targetAngle
-    //     );
-
-    //     drive(xSpeed, ySpeed, rotationOutput);
-    // }
-
-    // public void driveAutoAim(double xSpeed, double ySpeed) {
-    //     double targetRadians = AimingParameters.getTargetHeading(getPose());
-    //     driveToAngle(xSpeed, ySpeed, targetRadians);
-    // }
 
     public void drive(double xSpeed, double ySpeed, double rot) {
         ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(

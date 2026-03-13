@@ -71,18 +71,18 @@ public class Vision {
     }
 
     private void logTargets(PhotonPipelineResult result) {
-        if (!result.hasTargets()) return;
+        boolean hasTargets = result.hasTargets();
+        SmartDashboard.putBoolean("Vision/Has Target", hasTargets);
 
-        var best = result.getBestTarget();
-        var transform = best.getBestCameraToTarget();
+        if(!hasTargets) SmartDashboard.putNumber("Vision/Target ID", -1);
 
-        SmartDashboard.putNumber("Vision/Target ID", best.getFiducialId());
-        SmartDashboard.putNumber("Vision/Ambiguity", best.getPoseAmbiguity());
-        SmartDashboard.putNumber("Vision/Target Dist X (m)", transform.getX());
-        SmartDashboard.putNumber("Vision/Target Dist Y (m)", transform.getY());
-
+        var bestTarget = result.getBestTarget();
+        var transform = bestTarget.getBestCameraToTarget();
         double distance = Math.hypot(transform.getX(), transform.getY());
-        SmartDashboard.putNumber("Vision/Direct Distance (m)", distance);
+
+        SmartDashboard.putNumber("Vision/Target ID", bestTarget.getFiducialId());
+        SmartDashboard.putNumber("Vision/Ambiguity", bestTarget.getPoseAmbiguity());
+        SmartDashboard.putNumber("Vision Distance (m)", distance);
     }
 
     private boolean isValidVisionResult(PhotonPipelineResult result) {

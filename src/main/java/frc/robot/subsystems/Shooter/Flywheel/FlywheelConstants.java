@@ -15,5 +15,5 @@ public class FlywheelConstants {
     public static final double kP = 1.0;
     public static final double kV = 0.12;
 
-    public static final double IdleSpeed = 30;
+    public static final double IdleSpeed = 10;
 }

@@ -23,13 +23,11 @@ import frc.robot.hardware.interfaces.GenericGyro;
 import frc.robot.subsystems.Drivetrain.DrivetrainConstants.DriveMotorConfig;
 import frc.robot.subsystems.Drivetrain.DrivetrainConstants.StreetMotorConfig;
 import frc.robot.subsystems.Drivetrain.module.SwerveModule;
-import frc.robot.subsystems.Vision.Vision;
 import frc.robot.utils.AutoAimCalculator;
 
 public class Drivetrain extends SubsystemBase {
     private static Drivetrain instance;
 
-    private final Vision vision;
     private final GenericGyro gyro;
 
     private final SwerveModule[] swerveModules;
@@ -39,7 +37,6 @@ public class Drivetrain extends SubsystemBase {
     private final StructPublisher<Pose2d> publisherField;
 
     private Drivetrain() {
-        vision = new Vision(this::addVisionMeasurement);
         gyro = GyroFactory.createGyro(DrivetrainConstants.gyroModel, DrivetrainConstants.gyroID);
 
         swerveModules = new SwerveModule[4];
@@ -74,13 +71,11 @@ public class Drivetrain extends SubsystemBase {
 
         publisherField.set(getPose());
 
-        vision.update();
-
         SwerveModuleState[] states = getModuleStates();
         for (int i = 0; i < states.length; i++) SmartDashboard.putNumber("Wheel " + i + " Speed (m/s)", states[i].speedMetersPerSecond);
     }
 
-    private void addVisionMeasurement(Pose2d visionMeasurement, double timestampSeconds, Matrix<N3, N1> stdDevs) {
+    public void addVisionMeasurement(Pose2d visionMeasurement, double timestampSeconds, Matrix<N3, N1> stdDevs) {
         poseEstimator.addVisionMeasurement(visionMeasurement, timestampSeconds, stdDevs);
     }
 

@@ -20,6 +20,7 @@ import frc.robot.commands.Intake.Intaking;
 import frc.robot.commands.Intake.TogglePivotPosition;
 import frc.robot.subsystems.Drivetrain.Drivetrain;
 import frc.robot.subsystems.Shooter.Flywheel.Flywheel;
+import frc.robot.subsystems.Vision.Vision;
 
 public class RobotContainer {
 	private Drivetrain drivetrain = Drivetrain.getInstance();
@@ -28,15 +29,17 @@ public class RobotContainer {
 	private CommandXboxController controller = new CommandXboxController(0);
 
 	public RobotContainer() {
+		new Vision(drivetrain::addVisionMeasurement);
+
 		drivetrain.setDefaultCommand(new Drive(controller));
 		flywheel.setDefaultCommand(new SpinningIdle());
 
 		controller.rightBumper().whileTrue(new Shooting(controller));
 		
+		controller.leftBumper().onTrue(new TogglePivotPosition());
+
 		controller.b().onTrue(new ToggleClimberPosition());
 		controller.x().onTrue(new Climbing());
-
-		controller.leftBumper().onTrue(new TogglePivotPosition());
 
 		controller.a().toggleOnTrue(new Intaking());
 	}

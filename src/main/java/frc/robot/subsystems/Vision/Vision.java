@@ -18,8 +18,9 @@ import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Vision {
+public class Vision extends SubsystemBase {
     private final PhotonCamera camera;
 
     private Matrix<N3, N1> currentStdDevs ;
@@ -49,7 +50,8 @@ public class Vision {
         }
     }
 
-    public void update() {
+    @Override
+    public void periodic() {
         Optional<PhotonPipelineResult> result = getLatestResult();
         if(result.isEmpty()) return;
 

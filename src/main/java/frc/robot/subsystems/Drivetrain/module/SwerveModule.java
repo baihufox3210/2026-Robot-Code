@@ -10,38 +10,45 @@ import frc.robot.subsystems.Drivetrain.DrivetrainConstants;
 
 public class SwerveModule {
     private final GenericMotor driveMotor;
-    private final GenericMotor turningMotor;
+    private final GenericMotor streetMotor;
 
     private final GenericEncoder driveEncoder;
-    private final GenericEncoder turningEncoder;
+    private final GenericEncoder streetEncoder;
+
+    private final GenericEncoder streetAbsEncoder;
 
     private SwerveModuleState desiredState;
 
-    public SwerveModule(int driveMotorID, int turningMotorID, double angleOffset) {
+    public SwerveModule(int driveMotorID, int streetMotorID, double angleOffset) {
         driveMotor = MotorFactory.createMotor(driveMotorID, DrivetrainConstants.driveMotorModel, DrivetrainConfig.getDriveMotorConfig());
-        turningMotor = MotorFactory.createMotor(turningMotorID, DrivetrainConstants.turningMotorModel, DrivetrainConfig.getTurningMotorConfig(angleOffset));
+        streetMotor = MotorFactory.createMotor(streetMotorID, DrivetrainConstants.streetMotorModel, DrivetrainConfig.getStreetMotorConfig(angleOffset));
 
         driveEncoder = driveMotor.getEncoder();
-        turningEncoder = turningMotor.getAbsoluteEncoder();
+        streetEncoder = streetMotor.getEncoder();
+
+        streetAbsEncoder = streetMotor.getAbsoluteEncoder();
 
         driveMotor.configure();
-        turningMotor.configure();
+        streetMotor.configure();
+
+        resetEncoder();
+        resetToAbsoluteEncoder();
 
         desiredState = new SwerveModuleState();
-        desiredState.angle = new Rotation2d(turningEncoder.getPosition());
+        desiredState.angle = new Rotation2d(streetEncoder.getPosition());
     }
 
     public SwerveModuleState getState() {
         return new SwerveModuleState(
             driveEncoder.getVelocity(),
-            new Rotation2d(turningEncoder.getPosition())
+            new Rotation2d(streetEncoder.getPosition())
         );
     }
 
     public SwerveModulePosition getPosition() {
         return new SwerveModulePosition(
             driveEncoder.getPosition(),
-            new Rotation2d(turningEncoder.getPosition())
+            new Rotation2d(streetEncoder.getPosition())
         );
     }
 
@@ -49,17 +56,22 @@ public class SwerveModule {
         driveEncoder.setPosition(0);
     }
 
+    private void resetToAbsoluteEncoder() {
+        double absolutePosition = streetAbsEncoder.getPosition();
+        streetEncoder.setPosition(absolutePosition);
+    }
+
     public void setDesiredState(SwerveModuleState desiredState) {
-        desiredState.optimize(new Rotation2d(turningEncoder.getPosition()));
+        desiredState.optimize(new Rotation2d(streetEncoder.getPosition()));
 
         driveMotor.setVelocity(desiredState.speedMetersPerSecond);
-        turningMotor.setPosition(desiredState.angle.getRadians());
+        streetMotor.setPosition(desiredState.angle.getRadians());
 
         this.desiredState = desiredState;
     }
 
     public void stop() {
         driveMotor.stop();
-        turningMotor.stop();
+        streetMotor.stop();
     }
 }

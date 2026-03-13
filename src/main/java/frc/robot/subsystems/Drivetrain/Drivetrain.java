@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.hardware.Factory.GyroFactory;
 import frc.robot.hardware.interfaces.GenericGyro;
 import frc.robot.subsystems.Drivetrain.DrivetrainConstants.DriveMotorConfig;
-import frc.robot.subsystems.Drivetrain.DrivetrainConstants.TurningMotorConfig;
+import frc.robot.subsystems.Drivetrain.DrivetrainConstants.StreetMotorConfig;
 import frc.robot.subsystems.Drivetrain.module.SwerveModule;
 import frc.robot.subsystems.Vision.Vision;
 
@@ -30,6 +30,7 @@ public class Drivetrain extends SubsystemBase {
 
     private final Vision vision;
     private final GenericGyro gyro;
+
     private final SwerveModule[] swerveModules;
 
     private final SwerveDrivePoseEstimator poseEstimator;
@@ -44,7 +45,7 @@ public class Drivetrain extends SubsystemBase {
         for (int i = 0; i < 4; i++) {
             swerveModules[i] = new SwerveModule(
                 DrivetrainConstants.driveMotorIDs[i],
-                DrivetrainConstants.turningMotorIDs[i],
+                DrivetrainConstants.streetMotorIDs[i],
                 DrivetrainConstants.AngleOffsets[i]
             );
         }
@@ -97,7 +98,7 @@ public class Drivetrain extends SubsystemBase {
         ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
             xSpeed * DriveMotorConfig.maxSpeedMetersPerSecond,
             ySpeed * DriveMotorConfig.maxSpeedMetersPerSecond,
-            rot * TurningMotorConfig.maxAngularSpeedRadiansPerSecond,
+            rot * StreetMotorConfig.maxAngularSpeedRadiansPerSecond,
             gyro.getRotation2d()
         );
 

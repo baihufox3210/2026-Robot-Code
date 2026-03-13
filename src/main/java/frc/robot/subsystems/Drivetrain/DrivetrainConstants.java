@@ -3,8 +3,6 @@ package frc.robot.subsystems.Drivetrain;
 import static edu.wpi.first.units.Units.Inches;
 import static edu.wpi.first.units.Units.Meters;
 
-import com.revrobotics.spark.FeedbackSensor;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -14,12 +12,12 @@ import frc.robot.hardware.Factory.MotorFactory.MotorModel;
 
 public class DrivetrainConstants {
     public static final MotorModel driveMotorModel = MotorModel.Neo;
-    public static final MotorModel turningMotorModel = MotorModel.Neo550;
+    public static final MotorModel streetMotorModel = MotorModel.Neo550;
 
     public static final GyroModel gyroModel = GyroModel.PIGEON;
 
     public static final int[] driveMotorIDs = {11, 12, 13, 14};
-    public static final int[] turningMotorIDs = {21, 22, 23, 24};
+    public static final int[] streetMotorIDs = {21, 22, 23, 24};
 
     public static final double TrackWidth = 0.635;
     public static final double WheelBase = 0.635;
@@ -33,14 +31,9 @@ public class DrivetrainConstants {
         new Translation2d(-WheelBase / 2, -TrackWidth / 2)
     );
 
-    public static final Pose2d InitialPose = new Pose2d(0, 0, Rotation2d.kZero);
+    public static final Pose2d InitialPose = new Pose2d(4.03, 0.0, Rotation2d.kZero);
 
-    public static final double[] AngleOffsets = {
-        0.6521126,
-        0.5067503,
-        0.8277588,
-        0.6364698
-    };
+    public static final double[] AngleOffsets = {0.6521126, 0.5067503, 0.8277588, 0.6364698};
 
     public static final class DriveMotorConfig {
         public static final double GearRatio = 5.08;
@@ -61,9 +54,7 @@ public class DrivetrainConstants {
         public static final double kA = 0.0;
     }
 
-    public static final class TurningMotorConfig {
-        public static final int SupplyCurrentLimit = 20;
-
+    public static final class StreetMotorConfig {
         public static final boolean EncoderInverted = true;
 
         public static final double GearRatio = 25;
@@ -75,8 +66,6 @@ public class DrivetrainConstants {
 
         public static final double PositionWrapMin = 0;
         public static final double PositionWrapMax = 2 * Math.PI;
-
-        public static final FeedbackSensor FeedbackSensorType = FeedbackSensor.kAbsoluteEncoder;
 
         public static final double kP = 1.0;
         public static final double kI = 0.0;

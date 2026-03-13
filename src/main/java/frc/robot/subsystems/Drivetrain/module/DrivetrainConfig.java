@@ -2,14 +2,11 @@ package frc.robot.subsystems.Drivetrain.module;
 
 import frc.robot.hardware.config.MotorConfig;
 import frc.robot.subsystems.Drivetrain.DrivetrainConstants.DriveMotorConfig;
-import frc.robot.subsystems.Drivetrain.DrivetrainConstants.TurningMotorConfig;
+import frc.robot.subsystems.Drivetrain.DrivetrainConstants.StreetMotorConfig;
 
 public class DrivetrainConfig {
-    private static MotorConfig driveMotorConfig;
-    private static MotorConfig turningMotorConfig;
-
     public static MotorConfig getDriveMotorConfig() {
-        driveMotorConfig = new MotorConfig();
+        MotorConfig driveMotorConfig = new MotorConfig();
 
         driveMotorConfig.setGearRatio(DriveMotorConfig.GearRatio);
         driveMotorConfig.setinertia(0.025);
@@ -30,35 +27,33 @@ public class DrivetrainConfig {
         return driveMotorConfig;
     }
 
-    public static MotorConfig getTurningMotorConfig(double angleOffset) {
-        turningMotorConfig = new MotorConfig();
+    public static MotorConfig getStreetMotorConfig(double angleOffset) {
+        MotorConfig streetMotorConfig = new MotorConfig();
 
-        turningMotorConfig.setGearRatio(TurningMotorConfig.GearRatio);
+        streetMotorConfig.setGearRatio(StreetMotorConfig.GearRatio);
         
-        turningMotorConfig.setEncoderConversion(
-            TurningMotorConfig.PositionConversionFactor,
-            TurningMotorConfig.VelocityConversionFactor
+        streetMotorConfig.setEncoderConversion(
+            StreetMotorConfig.PositionConversionFactor,
+            StreetMotorConfig.VelocityConversionFactor
         );
 
-        turningMotorConfig.setEncoderInverted(TurningMotorConfig.EncoderInverted);
+        streetMotorConfig.setEncoderInverted(StreetMotorConfig.EncoderInverted);
 
-        turningMotorConfig.setPositionWrap(
-            TurningMotorConfig.PositionWrapMin,
-            TurningMotorConfig.PositionWrapMax
+        streetMotorConfig.setPositionWrap(
+            StreetMotorConfig.PositionWrapMin,
+            StreetMotorConfig.PositionWrapMax
         );
 
-        turningMotorConfig.setFeedbackSensorType(TurningMotorConfig.FeedbackSensorType);
+        streetMotorConfig.withKP(StreetMotorConfig.kP);
+        streetMotorConfig.withKI(StreetMotorConfig.kI);
+        streetMotorConfig.withKD(StreetMotorConfig.kD);
 
-        turningMotorConfig.withKP(TurningMotorConfig.kP);
-        turningMotorConfig.withKI(TurningMotorConfig.kI);
-        turningMotorConfig.withKD(TurningMotorConfig.kD);
+        streetMotorConfig.withKS(StreetMotorConfig.kS);
+        streetMotorConfig.withKV(StreetMotorConfig.kV);
+        streetMotorConfig.withKA(StreetMotorConfig.kA);
 
-        turningMotorConfig.withKS(TurningMotorConfig.kS);
-        turningMotorConfig.withKV(TurningMotorConfig.kV);
-        turningMotorConfig.withKA(TurningMotorConfig.kA);
+        streetMotorConfig.setAngleOffset(angleOffset);
 
-        turningMotorConfig.setAngleOffset(angleOffset);
-
-        return turningMotorConfig;
+        return streetMotorConfig;
     }
 }

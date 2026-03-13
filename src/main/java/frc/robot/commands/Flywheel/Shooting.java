@@ -28,8 +28,8 @@ public class Shooting extends Command {
 
     @Override
     public void execute() {
-        double xSpeed = InputTransform.applyDeadband(controller.getLeftY());
-        double ySpeed = InputTransform.applyDeadband(controller.getLeftX());
+        double xSpeed = -InputTransform.applyDeadband(controller.getLeftY());
+        double ySpeed = -InputTransform.applyDeadband(controller.getLeftX());
 
         flywheel.runAutoVelocity();
         feeder.run();

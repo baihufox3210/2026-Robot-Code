@@ -5,6 +5,6 @@ import frc.robot.RobotConstants;
 
 public class InputTransform {
     public static double applyDeadband(double input) {
-        return -MathUtil.applyDeadband(input, RobotConstants.Deadband);
+        return MathUtil.applyDeadband(input, RobotConstants.Deadband);
     }
 }

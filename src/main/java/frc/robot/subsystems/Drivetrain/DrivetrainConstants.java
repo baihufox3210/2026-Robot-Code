@@ -41,8 +41,6 @@ public class DrivetrainConstants {
         new PIDConstants(2.0, 0.0, 0.0)   
     );
 
-    public static final PIDController rotationPID = new PIDController(0.7, 0.0, 0.0);
-
     public static final Pose2d InitialPose = new Pose2d(0, 0.0, Rotation2d.kZero);
 
     public static final double[] AngleOffsets = {0.6521126, 0.5067503, 0.8277588, 0.6364698};
@@ -88,10 +86,5 @@ public class DrivetrainConstants {
         public static final double kA = 0.0;
 
         public static final FeedbackSensor feedbackSensorType = FeedbackSensor.kAbsoluteEncoder;
-    }
-
-    static {
-        rotationPID.enableContinuousInput(-Math.PI, Math.PI);
-        rotationPID.setTolerance(Math.toRadians(2));
     }
 }

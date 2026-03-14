@@ -21,8 +21,8 @@ public class AimingParameters {
     private static Translation2d getTargetPosition(Pose2d currentPose) {
         final Zone robotZone = FieldZone.getZone(currentPose);
 
-        if(robotZone == Zone.ALLIANCE) return FieldTransformer.transform(RobotConstants.AllianceHub);
-        if(robotZone == Zone.OPPONENT) return FieldTransformer.transform(RobotConstants.AllianceHub, !RobotConstants.isRedAlliance());
+        if(robotZone == Zone.ALLIANCE) return FieldTransformer.transform(RobotConstants.AllianceHub.toTranslation2d());
+        if(robotZone == Zone.OPPONENT) return FieldTransformer.transform(RobotConstants.AllianceHub.toTranslation2d(), !RobotConstants.isRedAlliance());
 
         Translation2d baseFerryTarget = RobotConstants.FerryTarget;
         boolean isLeftSide = currentPose.getY() > RobotConstants.FieldSize.getY() / 2;
